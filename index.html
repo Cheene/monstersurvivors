@@ -14,73 +14,200 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monster Survivors - Epic Survival Adventure Game | Play Online</title>
     <meta name="description" content="Play Monster Survivors online - An epic survival adventure where you battle hordes of monsters. Experience intense action and strategic gameplay in this thrilling monster-fighting game.">
-    <link rel="canonical" href="https://monstersurvivors.com" />
+    <link rel="canonical" href="https://monstersurvivors.vip/" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
         :root {
-            --apple-blue: #007AFF;
-            --apple-gray: #8E8E93;
+            --game-brown: #8B4513;
+            --game-orange: #FFA500;
+            --game-green: #32CD32;
+        }
+        
+        .game-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .brick-bg {
+            background-color: #8B4513;
+            background-image: linear-gradient(335deg, rgba(0,0,0,0.2) 0%, transparent 40%),
+                            linear-gradient(#8B4513 2px, transparent 2px),
+                            linear-gradient(90deg, #8B4513 2px, transparent 2px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            background-position: 0 0, 15px 15px, 15px 15px;
+        }
+        
+        .game-button {
+            background: var(--game-orange);
+            border: 3px solid #FFF;
+            box-shadow: 0 4px 0 #000;
+            transform: translateY(-2px);
+            transition: all 0.1s;
+        }
+        
+        .game-button:hover {
+            transform: translateY(0);
+            box-shadow: 0 2px 0 #000;
+        }
+
+        .game-container {
+            position: relative;
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            background: rgba(255, 215, 0, 0.9);
+            border: 2px solid #FFF;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            color: #8B4513;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(255, 215, 0, 1);
+            transform: scale(1.05);
+        }
+
+        .game-frame {
+            width: 100%;
+            height: 80vh;
+            max-height: 800px;
+        }
+
+        .game-frame.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            max-height: none;
+            z-index: 9999;
         }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8180073393994759" crossorigin="anonymous"></script>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="brick-bg min-h-screen font-sans">
+    <!-- Website URL Banner -->
+    <div class="bg-[#FFD700] text-center py-2 px-4 shadow-md">
+        <a href="https://monstersurvivors.vip/" class="text-[#8B4513] hover:text-[#654321] font-bold">
+            🎮 monstersurvivors.vip
+        </a>
+    </div>
+
     <!-- Header Section -->
-    <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-6">
-            <h1 class="text-4xl md:text-5xl font-bold text-[#007AFF] text-center">Monster Survivors</h1>
-            <p class="text-xl md:text-2xl text-center mt-4 text-gray-700">Survive, Fight, and Conquer in an Epic Monster Battle Adventure</p>
+    <header class="py-8">
+        <div class="container mx-auto px-4">
+            <h1 class="game-font text-4xl md:text-5xl font-bold text-[#FFD700] text-center drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                Monster Survivors
+            </h1>
+            <p class="game-font text-lg md:text-xl text-center mt-4 text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                Survive, Fight, and Conquer
+            </p>
         </div>
     </header>
 
     <!-- Game Section -->
     <main class="container mx-auto px-4 py-8">
         <!-- Game Frame -->
-        <div class="w-full max-w-4xl mx-auto aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
-            <iframe 
-                src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html"
-                class="w-full h-full"
-                frameborder="0"
-                allowfullscreen>
-            </iframe>
+        <div class="game-container">
+            <button id="fullscreenBtn" class="fullscreen-btn">
+                📺 全屏
+            </button>
+            <div id="gameWrapper" class="w-full bg-black rounded-lg overflow-hidden shadow-2xl border-4 border-[#FFD700]">
+                <iframe 
+                    id="gameFrame"
+                    src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html"
+                    class="game-frame"
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
 
         <!-- Game Description -->
         <section class="mt-12 max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-[#007AFF] mb-6">About Monster Survivors</h2>
-            <div class="prose max-w-none text-gray-700">
-                <p class="text-lg mb-6">
+            <h2 class="game-font text-3xl font-bold text-[#FFD700] mb-6 text-center">About Monster Survivors</h2>
+            <div class="bg-white/90 rounded-lg p-6 shadow-xl">
+                <p class="text-lg mb-6 text-[#8B4513]">
                     Monster Survivors is an intense survival action game where you face endless waves of challenging monsters. Test your skills, upgrade your abilities, and see how long you can survive in this thrilling adventure.
                 </p>
             </div>
 
-            <h2 class="text-3xl font-bold text-[#007AFF] mt-8 mb-6">Game Features</h2>
+            <h2 class="game-font text-3xl font-bold text-[#FFD700] mt-12 mb-6 text-center">Game Features</h2>
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-3">Endless Adventure</h3>
-                    <p>Face increasingly challenging waves of monsters in an endless survival experience.</p>
+                <div class="bg-white/90 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform">
+                    <h3 class="game-font text-xl font-semibold mb-3 text-[#8B4513]">Endless Adventure</h3>
+                    <p class="text-[#654321]">Face increasingly challenging waves of monsters in an endless survival experience.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-3">Character Development</h3>
-                    <p>Upgrade your abilities and unlock new powers as you progress through the game.</p>
+                <div class="bg-white/90 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform">
+                    <h3 class="game-font text-xl font-semibold mb-3 text-[#8B4513]">Character Development</h3>
+                    <p class="text-[#654321]">Upgrade your abilities and unlock new powers as you progress through the game.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-3">Strategic Combat</h3>
-                    <p>Plan your moves and use various tactics to overcome different types of monsters.</p>
+                <div class="bg-white/90 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform">
+                    <h3 class="game-font text-xl font-semibold mb-3 text-[#8B4513]">Strategic Combat</h3>
+                    <p class="text-[#654321]">Plan your moves and use various tactics to overcome different types of monsters.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-3">High Score Challenge</h3>
-                    <p>Compete for the highest survival time and challenge yourself to beat your records.</p>
+                <div class="bg-white/90 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform">
+                    <h3 class="game-font text-xl font-semibold mb-3 text-[#8B4513]">High Score Challenge</h3>
+                    <p class="text-[#654321]">Compete for the highest survival time and challenge yourself to beat your records.</p>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12">
-        <div class="container mx-auto px-4 py-6 text-center">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> Monster Survivors. All rights reserved.</p>
+    <footer class="mt-12 py-6 bg-[#654321] text-white">
+        <div class="container mx-auto px-4 text-center">
+            <p class="game-font">&copy; <script>document.write(new Date().getFullYear())</script> Monster Survivors. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const gameFrame = document.getElementById('gameFrame');
+        const gameWrapper = document.getElementById('gameWrapper');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                if (gameWrapper.requestFullscreen) {
+                    gameWrapper.requestFullscreen();
+                } else if (gameWrapper.webkitRequestFullscreen) {
+                    gameWrapper.webkitRequestFullscreen();
+                } else if (gameWrapper.msRequestFullscreen) {
+                    gameWrapper.msRequestFullscreen();
+                }
+                fullscreenBtn.textContent = '❌ 退出全屏';
+                gameFrame.classList.add('fullscreen');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                fullscreenBtn.textContent = '📺 全屏';
+                gameFrame.classList.remove('fullscreen');
+            }
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.textContent = '📺 全屏';
+                gameFrame.classList.remove('fullscreen');
+            }
+        });
+    </script>
 </body>
 </html> 
