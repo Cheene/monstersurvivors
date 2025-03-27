@@ -15,6 +15,10 @@
     <title>Monster Survivors - Epic Survival Adventure Game | Play Online</title>
     <meta name="description" content="Play Monster Survivors online - An epic survival adventure where you battle hordes of monsters. Experience intense action and strategic gameplay in this thrilling monster-fighting game.">
     <link rel="canonical" href="https://monstersurvivors.vip/" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://monstersurvivors.vip/favicon.png">
+    <link rel="apple-touch-icon" href="https://monstersurvivors.vip/favicon.png">
+    <meta name="theme-color" content="#8B4513">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -59,24 +63,54 @@
         }
 
         .fullscreen-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 10;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
             background: rgba(255, 215, 0, 0.9);
             border: 2px solid #FFF;
-            padding: 8px 12px;
+            padding: 12px 20px;
             border-radius: 8px;
             cursor: pointer;
             font-family: 'Press Start 2P', cursive;
-            font-size: 12px;
+            font-size: 14px;
             color: #8B4513;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .fullscreen-btn:hover {
             background: rgba(255, 215, 0, 1);
             transform: scale(1.05);
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .control-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .control-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .key {
+            display: inline-block;
+            background: #8B4513;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin: 0 0.25rem;
+            font-family: monospace;
         }
 
         .game-frame {
@@ -94,15 +128,79 @@
             max-height: none;
             z-index: 9999;
         }
+
+        .url-banner {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .url-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .url-banner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .url-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .url-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .url-icon {
+            width: 20px;
+            height: 20px;
+            background: #8B4513;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFD700;
+            font-size: 12px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8180073393994759" crossorigin="anonymous"></script>
 </head>
 <body class="brick-bg min-h-screen font-sans">
     <!-- Website URL Banner -->
-    <div class="bg-[#FFD700] text-center py-2 px-4 shadow-md">
-        <a href="https://monstersurvivors.vip/" class="text-[#8B4513] hover:text-[#654321] font-bold">
-            🎮 monstersurvivors.vip
-        </a>
+    <div class="url-banner py-3">
+        <div class="container mx-auto px-4">
+            <div class="url-banner-content flex justify-center items-center">
+                <a href="https://monstersurvivors.vip/" class="url-link text-[#8B4513] font-bold">
+                    <span class="url-icon">🎮</span>
+                    <span class="floating">monstersurvivors.vip</span>
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Header Section -->
@@ -121,9 +219,6 @@
     <main class="container mx-auto px-4 py-8">
         <!-- Game Frame -->
         <div class="game-container">
-            <button id="fullscreenBtn" class="fullscreen-btn">
-                📺 全屏
-            </button>
             <div id="gameWrapper" class="w-full bg-black rounded-lg overflow-hidden shadow-2xl border-4 border-[#FFD700]">
                 <iframe 
                     id="gameFrame"
@@ -134,6 +229,36 @@
                 </iframe>
             </div>
         </div>
+
+        <!-- Game Controls -->
+        <section class="mt-12 max-w-4xl mx-auto">
+            <h2 class="game-font text-3xl font-bold text-[#FFD700] mb-6 text-center">Game Controls</h2>
+            <div class="bg-white/90 rounded-lg p-6 shadow-xl">
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <h3 class="game-font text-lg mb-2">Movement</h3>
+                        <p class="text-[#654321]">
+                            <span class="key">W</span> Up
+                            <span class="key">A</span> Left
+                            <span class="key">S</span> Down
+                            <span class="key">D</span> Right
+                        </p>
+                    </div>
+                    <div class="control-item">
+                        <h3 class="game-font text-lg mb-2">Attack</h3>
+                        <p class="text-[#654321]">Auto-attack nearby monsters</p>
+                    </div>
+                    <div class="control-item">
+                        <h3 class="game-font text-lg mb-2">Level Up</h3>
+                        <p class="text-[#654321]">Collect gems to level up</p>
+                    </div>
+                    <div class="control-item">
+                        <h3 class="game-font text-lg mb-2">Abilities</h3>
+                        <p class="text-[#654321]">Choose new abilities when leveling</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Game Description -->
         <section class="mt-12 max-w-4xl mx-auto">
@@ -164,7 +289,37 @@
                 </div>
             </div>
         </section>
+
+        <!-- Pro Tips -->
+        <section class="mt-12 max-w-4xl mx-auto">
+            <h2 class="game-font text-3xl font-bold text-[#FFD700] mb-6 text-center">Pro Tips</h2>
+            <div class="bg-white/90 rounded-lg p-6 shadow-xl">
+                <ul class="space-y-4 text-[#654321]">
+                    <li class="flex items-start">
+                        <span class="text-[#FFD700] mr-2">•</span>
+                        Keep moving to avoid getting surrounded by monsters
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-[#FFD700] mr-2">•</span>
+                        Collect experience gems to grow stronger and level up faster
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-[#FFD700] mr-2">•</span>
+                        Choose complementary abilities that work well together
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-[#FFD700] mr-2">•</span>
+                        Watch your health bar to avoid unexpected defeats
+                    </li>
+                </ul>
+            </div>
+        </section>
     </main>
+
+    <!-- Fullscreen Button -->
+    <button id="fullscreenBtn" class="fullscreen-btn">
+        📺 全屏
+    </button>
 
     <!-- Footer -->
     <footer class="mt-12 py-6 bg-[#654321] text-white">
