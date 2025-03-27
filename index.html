@@ -63,17 +63,17 @@
         }
 
         .fullscreen-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+            position: absolute;
+            top: -40px;
+            right: 10px;
             z-index: 100;
             background: rgba(255, 215, 0, 0.9);
             border: 2px solid #FFF;
-            padding: 12px 20px;
+            padding: 8px 16px;
             border-radius: 8px;
             cursor: pointer;
             font-family: 'Press Start 2P', cursive;
-            font-size: 14px;
+            font-size: 12px;
             color: #8B4513;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -219,6 +219,9 @@
     <main class="container mx-auto px-4 py-8">
         <!-- Game Frame -->
         <div class="game-container">
+            <button id="fullscreenBtn" class="fullscreen-btn">
+                🎮 Fullscreen
+            </button>
             <div id="gameWrapper" class="w-full bg-black rounded-lg overflow-hidden shadow-2xl border-4 border-[#FFD700]">
                 <iframe 
                     id="gameFrame"
@@ -316,11 +319,6 @@
         </section>
     </main>
 
-    <!-- Fullscreen Button -->
-    <button id="fullscreenBtn" class="fullscreen-btn">
-        📺 全屏
-    </button>
-
     <!-- Footer -->
     <footer class="mt-12 py-6 bg-[#654321] text-white">
         <div class="container mx-auto px-4 text-center">
@@ -342,7 +340,7 @@
                 } else if (gameWrapper.msRequestFullscreen) {
                     gameWrapper.msRequestFullscreen();
                 }
-                fullscreenBtn.textContent = '❌ 退出全屏';
+                fullscreenBtn.textContent = '❌ Exit Fullscreen';
                 gameFrame.classList.add('fullscreen');
             } else {
                 if (document.exitFullscreen) {
@@ -352,14 +350,14 @@
                 } else if (document.msExitFullscreen) {
                     document.msExitFullscreen();
                 }
-                fullscreenBtn.textContent = '📺 全屏';
+                fullscreenBtn.textContent = '🎮 Fullscreen';
                 gameFrame.classList.remove('fullscreen');
             }
         });
 
         document.addEventListener('fullscreenchange', () => {
             if (!document.fullscreenElement) {
-                fullscreenBtn.textContent = '📺 全屏';
+                fullscreenBtn.textContent = '🎮 Fullscreen';
                 gameFrame.classList.remove('fullscreen');
             }
         });
